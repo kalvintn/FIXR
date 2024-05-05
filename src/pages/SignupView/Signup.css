@@ -1,0 +1,43 @@
+main {
+    display: flex;
+    align-items: center;
+}
+main h2 {
+    color: white;
+}
+main ul {
+    color: white;
+    margin: 2px;
+}
+
+
+/* Form elements */
+form div {
+    margin: 20px;
+}
+
+form label {
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+    display: block;
+    padding: 5px;
+}
+
+form input {
+    width: 90%;
+    padding: 3px;
+    margin: 5px;
+}
+
+/* submit button */
+form button { 
+    display: block;
+    color: white;
+    font-size: 1.3em;
+    font-weight: bold;
+    background-color: #0E26FF;
+    padding: 10px 20px;
+    border: 2px solid black;
+    margin: auto;
+}
