@@ -1,0 +1,33 @@
+/* Main Footer */
+footer {
+    background-color: #D7263D;
+    max-height: fit-content;
+    padding: 7px 15px;
+    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
+
+    /* alight to bottom */
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 99%;
+    bottom: 0;
+}
+
+
+.footer-wrapper {
+    margin-right: auto;
+}
+
+/* Logo */
+footer img {
+    height: 3em;
+    border: 1px solid #0000004f;
+    border-radius: 5%;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* copyright text */
+footer p {
+    font-weight: bold;
+    padding-left: 10px;
+}
