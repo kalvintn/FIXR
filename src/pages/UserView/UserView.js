@@ -10,7 +10,7 @@ import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 
-function UserView(){
+function UserView({ role }){
     return(
         <div>
             <Header>
@@ -18,7 +18,7 @@ function UserView(){
                 <Link to="/create-post">+ Add New Post</Link>
             </Header>
             <Main>
-                <p>Welcome to the user page!</p>
+                <p>MY ROLE : { role } </p>
             </Main>
             <Footer />
         </div>   

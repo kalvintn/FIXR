@@ -7,14 +7,29 @@ import './Signup.css';
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+// Firebase
+import { db } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
+
 // Needed Components
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 import Card from "../../components/Card";
 
-function Signup(){
+function Signup({ role }){
     const navigate = useNavigate();
+
+
+    // Function to write data to Firestore
+    const writeDataToFirestore = async (userAccount) => {
+        try {
+            await addDoc(collection(db, "users"), userAccount);
+            console.log("Data written to Firestore successfully!");
+        } catch (error) {
+            console.error("Error writing data to Firestore: ", error);
+        }
+    };
 
     // Manage signup form data
     const [formData, setFormData] = useState({
@@ -74,8 +89,18 @@ function Signup(){
 
         // Persist in database only IF PASSES ACCOUNT CREATION CHECKS
         if(isValid){
-            // Handle form submission, e.g., send data to server
-            console.log(formData);
+            // Bundle data; write account information to database
+            const userAccount = {
+                email: email,
+                username: username,
+                password: password,
+            };
+            writeDataToFirestore(userAccount);
+
+            // Pass role 'regular' or 'admin' up to the parent App.js
+            // Set user role based on username
+            const new_role = username === "admin" ? "admin" : "regular";
+            role(new_role);
 
             // Navigate to users page (after successful account creation)
             navigate('/user');
@@ -91,7 +116,7 @@ function Signup(){
                 <Link to="/guest">View as Guest</Link>
             </Header>
             <Main>
-                <h2>Welcome! Sign Up:</h2>
+                <h2>Welcome! <span>Sign Up</span></h2>
                 <Card className="short-card">
                     <form onSubmit={handleSubmit}>
                         <div>

@@ -5,13 +5,19 @@ import './Login.css';
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+// Firebase
+import { db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+
 // Needed Components
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 import Card from "../../components/Card";
 
-function Login(){
+
+
+function Login({ role }){
     const navigate = useNavigate();
 
     // Manage login form data
@@ -28,23 +34,51 @@ function Login(){
             [name]: value
         }));
     };
-    
+
+    // Function to check firebase for existing account
+    const checkUserExists = async (username, password) => {
+        try {
+            const allUsers = collection(db, "users");
+            const querySnapshot = await getDocs(allUsers);
+            
+            // Iterate through all users to find a match
+            for (const doc of querySnapshot.docs) {
+                const userData = doc.data();
+                if (userData.username === username && userData.password === password) {
+                    return true; // Match found
+                }
+            }
+            return false; // Match NOT found
+        } catch (error) {
+          console.error("Error checking user existence: ", error);
+          throw error;
+        }
+    };
+
     // Handle submit on hitting submit
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        /* CHECK ACCOUNT EXISTS FOR LOGIN */
-        let exists = false;
+        // Grab submitted values
+        const formData = new FormData(e.target);
+        const username = formData.get("username");
+        const password = formData.get("password");
 
-        // Check if account exists
-        // ...
-            
+
+        /* CHECK ACCOUNT EXISTS FOR LOGIN */
+        const exists = await checkUserExists(username, password);
+        
+        // ACTION AFTER CREDENTIALS INPUT
         if(exists){
+            // Pass role 'regular' or 'admin' up to the parent App.js
+            // Set user role based on username
+            const new_role = username === "admin" ? "admin" : "regular";
+            role(new_role);
 
             // Go to users page if account exists
             navigate('/user');
         } else {
-            // Reset form fields after attempted submission
+            // Reset form fields for failed submissions
             setFormData({
                 email: "",
                 username: "",
@@ -63,7 +97,7 @@ function Login(){
                 <Link to="/guest">View as Guest</Link>
             </Header>
             <Main>
-                <h2>Welcome back! Login:</h2>
+                <h2>Welcome back! <span>Login</span></h2>
                 <Card className="short-card">
                     <form onSubmit={handleSubmit}>
                         <div>

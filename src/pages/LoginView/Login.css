@@ -5,6 +5,11 @@ main {
 main h2 {
     color: white;
 }
+main span {
+    color: black;
+    background-color: #ecfd63;
+    padding: 3px;
+}
 
 /* Form elements */
 form div {
