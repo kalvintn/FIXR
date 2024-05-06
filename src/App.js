@@ -32,9 +32,9 @@ function App() {
           <Route path="/login" element={<LoginView role={updateUserRole}/>} />
           <Route path='/guest' element={<GuestView/>} />
           <Route path='/user' element={<UserView role={userRole}/>} />
-          <Route path='/create-post' element={<CreatePost/>} />
-          <Route path='/report-post' element={<ReportPost/>} />
-          <Route path='/admin-panel' element={<AdminPanel/>} />
+          <Route path='/create-post' element={<CreatePost role={userRole} />} />
+          <Route path='/report-post' element={<ReportPost role={userRole}/>} />
+          <Route path='/admin-panel' element={<AdminPanel role={userRole}/>} />
         </Routes>
       </div>
     </Router>

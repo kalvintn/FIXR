@@ -8,7 +8,6 @@ header {
     align-items: center;
     box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
-
 /* Logo */
 header img {
     height: 3em;
@@ -16,7 +15,13 @@ header img {
     border-radius: 5%;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
+/* Account Privileges */
+header p {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    margin-right: 100px;
+}
 
 
 .button-wrapper { 

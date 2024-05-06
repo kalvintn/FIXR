@@ -14,11 +14,12 @@ function UserView({ role }){
     return(
         <div>
             <Header>
+                <p> Account Privileges : { role } </p>
                 <Link to="/login">Logout</Link>
                 <Link to="/create-post">+ Add New Post</Link>
             </Header>
             <Main>
-                <p>MY ROLE : { role } </p>
+                <p>welcome to user page!</p>
             </Main>
             <Footer />
         </div>   

@@ -10,10 +10,11 @@ import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 
-function CreatePost(){
+function CreatePost({ role }){
     return(
         <div>
             <Header>
+                <p> Account Privileges : { role } </p>
                 <Link to="/user">Return to Posts</Link>
             </Header>
             <Main>

@@ -10,13 +10,14 @@ import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 
-function ReportPost(){
+function ReportPost({ role }){
     return(
         <div>
             <Header>
                 <Link to="/user">Return to Posts</Link>
             </Header>
             <Main>
+                <p> Account Privileges : { role } </p>
                 <p>Welcome to the report post page!</p>
             </Main>
             <Footer />
