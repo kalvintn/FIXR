@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
+import PostWrapper from "../../components/PostWrapper";
 
 function GuestView(){
     return(
@@ -18,7 +19,9 @@ function GuestView(){
                 <Link to="/login">Login</Link>
             </Header>
             <Main>
-                <p>Welcome to the guest page!</p>
+                <PostWrapper>
+                    <p>Welcome to the guest page!</p>
+                </PostWrapper>
             </Main>
             <Footer />
         </div>    

@@ -17,7 +17,7 @@ import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 import Card from "../../components/Card";
 
-function Signup({ role }){
+function Signup({ role, my_username }){
     const navigate = useNavigate();
 
 
@@ -101,6 +101,7 @@ function Signup({ role }){
             // Set user role based on username
             const new_role = username === "admin" ? "admin" : "regular";
             role(new_role);
+            my_username(username);
 
             // Navigate to users page (after successful account creation)
             navigate('/user');

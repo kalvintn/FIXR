@@ -5,7 +5,7 @@ main {
 main h2 {
     color: white;
 }
-main span {
+h2 span {
     color: black;
     background-color: #ecfd63;
     padding: 3px;

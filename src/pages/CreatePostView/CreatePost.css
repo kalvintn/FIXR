@@ -1,0 +1,19 @@
+form button {
+    color: black;
+    background-color: rgba(197, 216, 109, 0.5333);
+    padding: 1em 3.5em;
+    border-radius: 20px;
+}
+
+form textarea {
+    width: 90%;
+    margin: 5px;
+    padding: 3px;
+}
+
+form span {
+    font-size: 0.8em;
+    font-style: italic;
+    color: #a1f519;
+    background-color: none;
+}

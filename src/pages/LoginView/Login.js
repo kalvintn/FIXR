@@ -17,7 +17,7 @@ import Card from "../../components/Card";
 
 
 
-function Login({ role }){
+function Login({ role, my_username }){
     const navigate = useNavigate();
 
     // Manage login form data
@@ -74,6 +74,7 @@ function Login({ role }){
             // Set user role based on username
             const new_role = username === "admin" ? "admin" : "regular";
             role(new_role);
+            my_username(username);
 
             // Go to users page if account exists
             navigate('/user');

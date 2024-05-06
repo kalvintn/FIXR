@@ -16,9 +16,14 @@ import AdminPanel from './pages/AdminPanelView/AdminPanel';
 
 function App() {
   const [userRole, setUserRole] = useState(null);
+  const [username, setUsername] = useState(null);
 
   const updateUserRole = (role) => {
     setUserRole(role);
+  };
+
+  const updateUsername = (username) => {
+    setUsername(username);
   };
 
 
@@ -28,13 +33,13 @@ function App() {
       <div>
         <Routes>
           <Route exact path='/' element={<GuestView/>} />
-          <Route path="/signup" element={<SignupView role={updateUserRole} />} />
-          <Route path="/login" element={<LoginView role={updateUserRole}/>} />
+          <Route path="/signup" element={<SignupView role={updateUserRole} my_username={updateUsername} />} />
+          <Route path="/login" element={<LoginView role={updateUserRole} my_username={updateUsername} />} />
           <Route path='/guest' element={<GuestView/>} />
-          <Route path='/user' element={<UserView role={userRole}/>} />
-          <Route path='/create-post' element={<CreatePost role={userRole} />} />
-          <Route path='/report-post' element={<ReportPost role={userRole}/>} />
-          <Route path='/admin-panel' element={<AdminPanel role={userRole}/>} />
+          <Route path='/user' element={<UserView role={userRole} my_username={username} />} />
+          <Route path='/create-post' element={<CreatePost role={userRole} my_username={username}  /> } />
+          <Route path='/report-post' element={<ReportPost role={userRole} my_username={username} />} />
+          <Route path='/admin-panel' element={<AdminPanel role={userRole} my_username={username} />} />
         </Routes>
       </div>
     </Router>

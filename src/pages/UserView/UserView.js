@@ -10,11 +10,12 @@ import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 
-function UserView({ role }){
+function UserView({ role, my_username }){
     return(
         <div>
             <Header>
-                <p> Account Privileges : { role } </p>
+                <p> Hello [{ my_username }] </p>
+                <p> Account Privileges : [{ role }] </p>
                 <Link to="/login">Logout</Link>
                 <Link to="/create-post">+ Add New Post</Link>
             </Header>

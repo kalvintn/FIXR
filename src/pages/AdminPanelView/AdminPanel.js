@@ -10,11 +10,12 @@ import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 
-function AdminPanel({ role }){
+function AdminPanel({ role, my_username }){
     return(
         <div>
             <Header>
-                <p> Account Privileges : { role } </p>
+                <p> Hello [{ my_username }] </p>
+                <p> Account Privileges : [{ role }] </p>
                 <Link to="/user">Return to Posts</Link>
             </Header>
             <Main>
