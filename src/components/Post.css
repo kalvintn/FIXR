@@ -1,7 +1,91 @@
 .post {
     display: inline-block;
-    width: 30%;
-    height: 15em;
-    border: 3px solid black;
+    width: 20%;
+    height: fit-content;
+    background-color: #C5D86D;
+    border: 2px solid black;
+    margin: 1em;
 }
+
+.post .image-wrapper {
+    width: 100%;
+    height: 6em;
+
+    border-bottom: 2px solid black;
+    overflow: hidden; /* Hide overflow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post img {
+    width: 100%;
+}
+
+.post h4,
+.post p {
+  margin: 0; /* Remove default margin */
+}
+
+/* title and author */
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5px;
+}
+
+.post-header h4,
+.post-header p {
+  margin-right: 10px; /* Adjust spacing between elements */
+}
+
+.post-body {
+    background-color: #b3aa77b0;
+    padding: 15px 5px;
+}
+
+.post-body .location {
+    font-style: italic;
+    margin-bottom: 0.5em;
+}
+
+.post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* like/dislike */
+.post-footer button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    padding: 10px;
+    border: 0;
+    border-top: 1px solid black;
+}
+
+.post-footer #thumbs_up {
+    background-color: #1B9986;
+}
+
+.post-footer #thumbs_down {
+    background-color: #f46036;
+}
+
+
+
+.post-footer button img {
+    width: 2em;
+}
+
+.post-footer button p {
+    color: black;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+  
 

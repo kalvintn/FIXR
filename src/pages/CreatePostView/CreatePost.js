@@ -58,7 +58,7 @@ function CreatePost({ role, my_username }){
         let formData = new FormData(e.target);
         let photoURL = formData.get("photoURL");
         let location = formData.get("location");
-        let title = formData.get("title");
+        let title = formData.get("postTitle");
         let description = formData.get("description");
 
 
@@ -88,7 +88,7 @@ function CreatePost({ role, my_username }){
         /* DECISIONS AFTER FORM ENTRY */
         if(isValid){
             // Check for blank fields, fix
-            const defaultPhotoURL = "../../media/flowers.jpeg";
+            const defaultPhotoURL = "https://images.unsplash.com/photo-1556834927-24062721858c?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
             const defaultDescription = "...";
 
             // Bundle data; write account information to database
