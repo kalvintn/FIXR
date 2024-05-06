@@ -4,6 +4,7 @@ import './CreatePost.css';
 // React
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 
 // Firebase
 import { db } from "../../firebase";
@@ -30,6 +31,7 @@ function CreatePost({ role, my_username }){
 
     // Manage create-post form data
     const [formData, setFormData] = useState({
+        id: uuidv4(),
         username: "",
         photoURL: "",
         location: "",
@@ -85,13 +87,17 @@ function CreatePost({ role, my_username }){
 
         /* DECISIONS AFTER FORM ENTRY */
         if(isValid){
+            // Check for blank fields, fix
+            const defaultPhotoURL = "../../media/flowers.jpeg";
+            const defaultDescription = "...";
+
             // Bundle data; write account information to database
             const userPost = {
-                username: { my_username } ,
-                photoURL: photoURL,
+                username: { my_username }.my_username ,
+                photoURL: photoURL || defaultPhotoURL,
                 location: location,
                 postTitle: title,
-                description: description,
+                description: description || defaultDescription,
                 likes: 0,
                 dislikes: 0,
             };
