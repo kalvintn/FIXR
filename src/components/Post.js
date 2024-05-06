@@ -7,6 +7,10 @@ import thumbs_up from '../media/thumbs_up.svg';
 import thumbs_down from '../media/thumbs_down.svg';
 import report_flag from '../media/report_flag.svg';
 
+// Firebase
+import { db } from "../firebase";
+import { doc, updateDoc, FieldValue } from "firebase/firestore";
+
 // Needed Components
 import Modal from "../components/Modal";
 
@@ -17,62 +21,50 @@ function Post(props){
     // Show a report modal on clicking report button click
     const [modalOpen, setModalOpen] = useState(false);
 
-    const handleOpenModal = () => {
-        setModalOpen(true);
-    };
+    // Hooks for like and dislike
+    const [likeCount, setLikeCount] = useState(likes);
+    const [dislikeCount, setDislikeCount] = useState(dislikes);
 
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
-/*
     // Update like count
-    const handleLike = (postID) => {
-        // Update like count in the database
-        db.collection('posts').doc(postID).update({
-            likes: likeCount + 1
-        }).then(() => {
-            // Update state with the new like count
-            setLikeCount(prevCount => prevCount + 1);
-            // If user has disliked the post previously, remove the dislike
-            if (dislikeCount > 0) {
-                db.collection('posts').doc(postID).update({
-                    dislikes: dislikeCount - 1
-                }).then(() => {
-                    // Update state with the new dislike count
-                    setDislikeCount(prevCount => prevCount - 1);
-                }).catch(error => {
-                    console.error('Error removing dislike:', error);
-                });
-            }
-        }).catch(error => {
-            console.error('Error updating like count:', error);
-        });
+    const handleLike = async (postID) => {
+        // Update like count locally
+        setLikeCount(prevCount => prevCount + 1);
+
+        // Update post like count in database
+        try {
+            await updateDoc(doc(db, "posts", postID), {
+                likes: FieldValue.increment(1)
+            });
+        } catch (error) {
+            console.error("Error updating likes: ", error);
+        }
     };
     
     // Update dislike count
-    const handleDislike = (postID) => {
+    const handleDislike = async (postID) => {
+        // Update dislike locally
+        setDislikeCount(prevCount => prevCount + 1);
+
         // Update dislike count in the database
-        db.collection('posts').doc(postID).update({
-            dislikes: dislikeCount + 1
-        }).then(() => {
-            // Update state with the new dislike count
-            setDislikeCount(prevCount => prevCount + 1);
-            // If user has liked the post previously, remove the like
-            if (likeCount > 0) {
-                db.collection('posts').doc(postID).update({
-                    likes: likeCount - 1
-                }).then(() => {
-                    // Update state with the new like count
-                    setLikeCount(prevCount => prevCount - 1);
-                }).catch(error => {
-                    console.error('Error removing like:', error);
-                });
-            }
-        }).catch(error => {
-            console.error('Error updating dislike count:', error);
-        });
+        try {
+            let ref = db.collection('posts').doc(postID);
+            await updateDoc(ref, {
+                dislikes: db.FieldValue.increment(1)
+            });
+        } catch (error) {
+            console.error("Error updating dislikes: ", error);
+        }
     };
-*/
+
+    // Modal controls - report
+    const handleOpenModal = () => {
+        setModalOpen(true);
+    };
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+
+
 
     return (
         <div className='post'>
@@ -90,8 +82,8 @@ function Post(props){
             <button className="report-flag" onClick={handleOpenModal}><img src={report_flag} alt="report" /><span>Report Post</span></button>
             <Modal postID={id} isOpen={modalOpen} onClose={handleCloseModal} />
             <div className="post-footer">
-                <button id="thumbs_up"><img src={thumbs_up} alt="thumbs_up" /> <p>{ likes }</p></button>
-                <button id="thumbs_down"><img src={thumbs_down} alt="thumbs_down" /> <p>{ dislikes }</p></button>
+                <button id="thumbs_up" onClick={() => handleLike({id})}><img src={thumbs_up} alt="thumbs_up" /> <p>{ likeCount }</p></button>
+                <button id="thumbs_down" onClick={() => handleDislike({id})}><img src={thumbs_down} alt="thumbs_down" /> <p>{ dislikeCount }</p></button>
             </div>
         </div>
     );

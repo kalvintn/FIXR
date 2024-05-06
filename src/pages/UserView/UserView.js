@@ -15,6 +15,7 @@ import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 import PostWrapper from "../../components/PostWrapper";
 import Post from "../../components/Post";
+import AdminPanel from "../AdminPanelView/AdminPanel";
 
 function UserView({ role, my_username }){
     // Loop through all posts in database -> display
@@ -40,6 +41,7 @@ function UserView({ role, my_username }){
             <Header>
                 <p> Hello [{ my_username }] </p>
                 <p> Account Privileges : [{ role }] </p>
+                {role === 'admin' ? <Link to="/admin-panel">Admin Panel</Link> : null}
                 <Link to="/login">Logout</Link>
                 <Link to="/create-post">+ Add New Post</Link>
             </Header>

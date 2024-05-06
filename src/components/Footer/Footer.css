@@ -1,5 +1,6 @@
 /* Main Footer */
 .footer {
+    box-sizing: border-box;
     background-color: #D7263D;
     max-height: fit-content;
     padding: 7px 15px;
@@ -9,7 +10,7 @@
     display: flex;
     align-items: center;
     position: fixed;
-    width: 99%;
+    width: 100%;
     bottom: 0;
 }
 
