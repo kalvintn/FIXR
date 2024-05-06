@@ -22,12 +22,20 @@
     width: 100%;
 }
 
+.post-body .report_flag {
+    width: 5px;
+    border: 1px solid black;
+    border-radius: 100%;
+}
+
+
+
+/* title and author */
 .post h4,
 .post p {
   margin: 0; /* Remove default margin */
 }
 
-/* title and author */
 .post-header {
   display: flex;
   align-items: center;
