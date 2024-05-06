@@ -7,17 +7,24 @@ import thumbs_up from '../media/thumbs_up.svg';
 import thumbs_down from '../media/thumbs_down.svg';
 import report_flag from '../media/report_flag.svg';
 
-// Firebase
-import { db } from "../firebase";
+// Needed Components
+import Modal from "../components/Modal";
 
 
 function Post(props){
-    let { postID, username, photoURL, location, postTitle, description, likes, dislikes } = props;
+    let { id, username, photoURL, location, postTitle, description, likes, dislikes } = props;
 
-    // Like/dislike hooks
-    const [likeCount, setLikeCount] = useState(likes);
-    const [dislikeCount, setDislikeCount] = useState(dislikes);
+    // Show a report modal on clicking report button click
+    const [modalOpen, setModalOpen] = useState(false);
 
+    const handleOpenModal = () => {
+        setModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+    };
+/*
     // Update like count
     const handleLike = (postID) => {
         // Update like count in the database
@@ -65,6 +72,7 @@ function Post(props){
             console.error('Error updating dislike count:', error);
         });
     };
+*/
 
     return (
         <div className='post'>
@@ -77,12 +85,13 @@ function Post(props){
             </div>
             <div className='post-body'>
                 <p className='location'>Location: {location}</p>
-                <button className="reportFlag" ><img src={report_flag} alt="report" /></button>
                 <p>{description}</p>
             </div>
+            <button className="report-flag" onClick={handleOpenModal}><img src={report_flag} alt="report" /><span>Report Post</span></button>
+            <Modal postID={id} isOpen={modalOpen} onClose={handleCloseModal} />
             <div className="post-footer">
-                <button id="thumbs_up" onClick={() => handleLike(postID)}><img src={thumbs_up} alt="thumbs_up" /> <p>{likeCount}</p></button>
-                <button id="thumbs_down" onClick={() => handleDislike(postID)}><img src={thumbs_down} alt="thumbs_down" /> <p>{dislikeCount}</p></button>
+                <button id="thumbs_up"><img src={thumbs_up} alt="thumbs_up" /> <p>{ likes }</p></button>
+                <button id="thumbs_down"><img src={thumbs_down} alt="thumbs_down" /> <p>{ dislikes }</p></button>
             </div>
         </div>
     );

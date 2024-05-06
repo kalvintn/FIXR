@@ -93,7 +93,8 @@ function CreatePost({ role, my_username }){
 
             // Bundle data; write account information to database
             const userPost = {
-                username: { my_username }.my_username ,
+                id: uuidv4(),
+                username: { my_username }.my_username || '?',
                 photoURL: photoURL || defaultPhotoURL,
                 location: location,
                 postTitle: title,

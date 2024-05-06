@@ -1,0 +1,24 @@
+header.w3-container h2 {
+    font-weight: bold;
+}
+
+
+/* modal form */
+form.modal-form {
+    padding: 5px;
+}
+
+form.modal-form textarea {
+    border: 1px solid black;
+}
+
+/* modal footer styles */
+footer.w3-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* modal footer button */
+footer.w3-container .w3-button {
+    font-weight: bold;
+}

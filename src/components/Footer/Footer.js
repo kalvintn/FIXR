@@ -9,7 +9,7 @@ import logo from '../../media/site_logo.png';
 
 function Footer(){
     return(
-        <footer>
+        <footer className='footer'>
             <img src={logo} alt="FIXR logo"/>
             <p>&#169; 2024 Kalvin Nguyen</p>
         </footer>
