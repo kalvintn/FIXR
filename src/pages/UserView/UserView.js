@@ -15,7 +15,6 @@ import Main from "../../components/Main/Main";
 import Footer from "../../components/Footer/Footer";
 import PostWrapper from "../../components/PostWrapper";
 import Post from "../../components/Post";
-import AdminPanel from "../AdminPanelView/AdminPanel";
 
 function UserView({ role, my_username }){
     // Loop through all posts in database -> display

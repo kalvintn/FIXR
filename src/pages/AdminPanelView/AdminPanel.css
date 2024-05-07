@@ -1,0 +1,14 @@
+
+main .admin-panel-wrapper  {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.admin-panel-wrapper {
+    width: 95%;
+}
+
+.admin-panel-wrapper > * {
+    flex-basis: 100%;
+}

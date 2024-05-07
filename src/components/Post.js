@@ -9,7 +9,7 @@ import report_flag from '../media/report_flag.svg';
 
 // Firebase
 import { db } from "../firebase";
-import { doc, updateDoc, FieldValue } from "firebase/firestore";
+import { getDocs, updateDoc, collection, query, where, increment } from "firebase/firestore";
 
 // Needed Components
 import Modal from "../components/Modal";
@@ -30,29 +30,56 @@ function Post(props){
         // Update like count locally
         setLikeCount(prevCount => prevCount + 1);
 
-        // Update post like count in database
+        // Update like count in Firebase
         try {
-            await updateDoc(doc(db, "posts", postID), {
-                likes: FieldValue.increment(1)
-            });
+            // Find correct post
+            const q = query(collection(db, "posts"), where("id", "==", postID));
+            const querySnapshot = await getDocs(q);
+    
+            // Increment likes
+            if (!querySnapshot.empty) {
+                querySnapshot.forEach(async (doc) => {
+                    //console.log(`Document with ID ${postID} found in collection "posts"`);
+                    //console.log("Document data:", doc.data());
+                    await updateDoc(doc.ref, {
+                        likes: increment(1)
+                    });
+                    //console.log(`Likes for post with ID ${postID} incremented by 1`);
+                });
+            } else {
+                console.log(`Document with ID ${postID} not found in collection "posts"`);
+            }
         } catch (error) {
-            console.error("Error updating likes: ", error);
+            console.error('Error updating likes:', error);
         }
     };
     
     // Update dislike count
     const handleDislike = async (postID) => {
-        // Update dislike locally
+        // Update dislike count locally
         setDislikeCount(prevCount => prevCount + 1);
 
-        // Update dislike count in the database
+        // Update dislike count in Firebase
         try {
-            let ref = db.collection('posts').doc(postID);
-            await updateDoc(ref, {
-                dislikes: db.FieldValue.increment(1)
-            });
+            // Find correct post
+            const q = query(collection(db, "posts"), where("id", "==", postID));
+            const querySnapshot = await getDocs(q);
+    
+            // Increment dislikes
+            if (!querySnapshot.empty) {
+                querySnapshot.forEach(async (doc) => {
+                    //console.log(`Document with ID ${postID} found in collection "posts"`);
+                    //console.log("Document data:", doc.data());
+                    await updateDoc(doc.ref, {
+                        dislikes: increment(1)
+                    });
+                    //console.log(`Dislikes for post with ID ${postID} incremented by 1`);
+                });
+            } else {
+                console.log(`Document with ID ${postID} not found in collection "posts"`);
+            }
         } catch (error) {
-            console.error("Error updating dislikes: ", error);
+            console.error('Error updating dislikes:', error);
         }
     };
 
@@ -82,8 +109,8 @@ function Post(props){
             <button className="report-flag" onClick={handleOpenModal}><img src={report_flag} alt="report" /><span>Report Post</span></button>
             <Modal postID={id} isOpen={modalOpen} onClose={handleCloseModal} />
             <div className="post-footer">
-                <button id="thumbs_up" onClick={() => handleLike({id})}><img src={thumbs_up} alt="thumbs_up" /> <p>{ likeCount }</p></button>
-                <button id="thumbs_down" onClick={() => handleDislike({id})}><img src={thumbs_down} alt="thumbs_down" /> <p>{ dislikeCount }</p></button>
+                <button id="thumbs_up" onClick={() => handleLike(id)}><img src={thumbs_up} alt="thumbs_up" /> <p>{ likeCount }</p></button>
+                <button id="thumbs_down" onClick={() => handleDislike(id)}><img src={thumbs_down} alt="thumbs_down" /> <p>{ dislikeCount }</p></button>
             </div>
         </div>
     );
