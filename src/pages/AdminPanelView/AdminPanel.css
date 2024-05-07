@@ -7,8 +7,12 @@ main .admin-panel-wrapper  {
 
 .admin-panel-wrapper {
     width: 95%;
+
+    border-radius: 5px;
 }
 
 .admin-panel-wrapper > * {
     flex-basis: 100%;
+    margin: 10px;
 }
+

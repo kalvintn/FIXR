@@ -3,13 +3,14 @@ import "./Modal.css";
 
 // React
 import React , { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 // Firebase
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 
-function Modal({ postID, isOpen, onClose }) {
+function Modal({ reportID, postID, isOpen, onClose }) {
     const [selectedReason, setSelectedReason] = useState('');
     const [reportDescription, setReportDescription] = useState('');
 
@@ -27,14 +28,12 @@ function Modal({ postID, isOpen, onClose }) {
     const handleSubmit = async () => {
         // Build report object
         const reportData = {
+            reportID: uuidv4(),
             postID: postID,
             reason: selectedReason || "No reason listed",
             description: reportDescription
         };
-        writeDataToFirestore(reportData);
-
-        // Submit to 'reports' collection in server
-
+        writeDataToFirestore(reportData);   // Submit to 'reports' collection in server
 
         // Clear form fields
         setSelectedReason('');

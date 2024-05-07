@@ -3,3 +3,26 @@
     font-weight: bold;
     padding: 5px 20px;
 }
+
+
+.report .buttons {
+    display: flex;
+    justify-content: end;
+}
+
+.report button {
+    font-weight: bold;
+    font-size: 1.2em;
+    background-color: black;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.report .remove { 
+    color: #FF0000;
+}
+
+.report .keep { 
+    color: #05F92C;
+}

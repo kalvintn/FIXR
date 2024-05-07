@@ -11,7 +11,6 @@ import LoginView from "./pages/LoginView/Login";
 import SignupView from "./pages/SignupView/Signup";
 import UserView from "./pages/UserView/UserView";
 import CreatePost from './pages/CreatePostView/CreatePost';
-import ReportPost from './pages/ReportPostView/ReportPost';
 import AdminPanel from './pages/AdminPanelView/AdminPanel';
 
 function App() {
@@ -38,7 +37,6 @@ function App() {
           <Route path='/guest' element={<GuestView/>} />
           <Route path='/user' element={<UserView role={userRole} my_username={username} />} />
           <Route path='/create-post' element={<CreatePost role={userRole} my_username={username}  /> } />
-          <Route path='/report-post' element={<ReportPost role={userRole} my_username={username} />} />
           <Route path='/admin-panel' element={<AdminPanel role={userRole} my_username={username} />} />
         </Routes>
       </div>
