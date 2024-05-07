@@ -47,7 +47,7 @@ function UserView({ role, my_username }){
             <Main>
                 <PostWrapper>
                     {posts.map((post, index) => (
-                        <Post key={index} {...post} />
+                        <Post key={index} role={role} {...post} />
                     ))}
                 </PostWrapper>
             </Main>

@@ -9,14 +9,13 @@ import report_flag from '../media/report_flag.svg';
 
 // Firebase
 import { db } from "../firebase";
-import { getDocs, updateDoc, collection, query, where, increment } from "firebase/firestore";
+import { getDocs, updateDoc, deleteDoc, collection, query, where, increment } from "firebase/firestore";
 
 // Needed Components
 import Modal from "../components/Modal";
 
-
 function Post(props){
-    let { id, username, photoURL, location, postTitle, description, likes, dislikes } = props;
+    let { id, username, photoURL, location, postTitle, description, likes, dislikes, role } = props;
 
     // Show a report modal on clicking report button click
     const [modalOpen, setModalOpen] = useState(false);
@@ -92,6 +91,30 @@ function Post(props){
     };
 
 
+    // Admin delete - delete any post (exlusive to admins)
+    const handleAdminDelete = async () => {
+        // Confirmation dialog
+        const result = window.confirm("Are you sure you wish to delete this post? There is no recovery method.");
+
+        // If the admin confirms...
+        if (result) {
+            // Find post
+            const q = query(collection(db, "posts"), where("id", "==", id ));
+            const querySnapshot = await getDocs(q);
+
+            // Remove entry
+            if (!querySnapshot.empty) {
+                //console.log(`Remove with ID ${id} found in collection "posts"`);
+                querySnapshot.forEach(async (doc) => {
+                    await deleteDoc(doc.ref);
+                    //console.log(`Remove with ID ${id} has been removed in collection "posts"`);
+                });
+            } else {
+                console.log(`Remove with ID ${id} not found in collection "reports"`);
+            }
+        }
+    }
+
 
     return (
         <div className='post'>
@@ -108,6 +131,7 @@ function Post(props){
             </div>
             <button className="report-flag" onClick={handleOpenModal}><img src={report_flag} alt="report" /><span>Report Post</span></button>
             <Modal postID={id} isOpen={modalOpen} onClose={handleCloseModal} />
+            {role === 'admin' ? <button className='delete-button' onClick={handleAdminDelete}>ADMIN DELETE</button>: null}
             <div className="post-footer">
                 <button id="thumbs_up" onClick={() => handleLike(id)}><img src={thumbs_up} alt="thumbs_up" /> <p>{ likeCount }</p></button>
                 <button id="thumbs_down" onClick={() => handleDislike(id)}><img src={thumbs_down} alt="thumbs_down" /> <p>{ dislikeCount }</p></button>

@@ -60,6 +60,7 @@ function Modal({ reportID, postID, isOpen, onClose }) {
                             <option value="No reason listen" >No reason listed</option>
                             <option value="spam">Spam</option>
                             <option value="inappropriate">Inappropriate content</option>
+                            <option value="false">False information</option>
                             <option value="other">Other</option>
                         </select>
                     </div>
