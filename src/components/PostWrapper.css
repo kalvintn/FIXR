@@ -1,8 +1,6 @@
 .post-wrapper {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    border: 10px inset blue;
-
     flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    width: 100%;
 }
