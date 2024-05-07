@@ -5,8 +5,8 @@ Also a final project for Software Engineering 4050. Powered by Firebase :)
 
 ## Modes of Execution
 
-"Guests" may read posts.
-"Users" can CRUD posts.
+"Guests" may read posts.  
+"Users" can CRUD posts.  
 "Admins" are users with special privileges.
 
 ## Components and Views
